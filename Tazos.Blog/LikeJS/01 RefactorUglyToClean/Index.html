@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>Registration</title>
+    <script src="http://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#register').on('click',
+                function () {
+                    $('#login-error').text('');
+                    $('#login-error').hide();
+                    if ($('#login').val() === null || $('#login').val() === undefined || $('#login').val() === '') {
+                        $('#login-error').text($('#login-error').text() + 'Login shuld be passed!');
+                        $('#login-error').show();
+                    } else if ($('#login').val().length <= 5 ) {
+                        $('#login-error').text($('#login-error').text() + 'Login shuld be longer!');
+                        $('#login-error').show();
+                    } else if (/^[a-zA-Z0-9]+$/i.test($('#login').val()) == false) {
+                        $('#login-error').text($('#login-error').text() + 'Login has illegal letters!');
+                        $('#login-error').show();
+                    }
+
+                    $('#email-error').text('');
+                    $('#email-error').hide();
+                    
+                    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test($('#email').val()) == false) {
+                        $('#email-error').text($('#email-error').text() + 'Email is not correct!');
+                        $('#email-error').show();
+                    }
+
+                    if ($('#password').val().length <= 5) {
+                        $('#password-error').text($('#password-error').text() + 'Password is to short!');
+                        $('#password-error').show();
+                    }
+
+                    if ($('#login-error').text().length === 0 && $('#email-error').text().length === 0 && $('#password-error').text().length === 0) {
+					$('#login-error').text('');
+					$('#email-error').text('');
+					$('#password-error').text('');
+					$('#registration').hide();
+					$('#loader').show();
+                    window.setTimeout(function(){
+					$('#loader').hide();
+					$('#registrationSucessed').show();
+						},1000)
+                    }
+                });
+        });
+    </script>
+</head>
+<body>
+	<div id="loader" style="display:none; width:200px; height: 200px; background-image: url('loader.gif');"></div>
+	<div id="registration">
+    <h3>Registration</h3>
+    <div class="field">
+        <input type="text" maxlength="20" placeholder="Login" id="login"/><span id="login-error" style="display:none; color: red;"></span>
+    </div>
+    <div class="field">
+        <input type="text" maxlength="128" placeholder="Email" id="email"/><span id="email-error" style="display:none; color: red;"></span>
+    </div>
+    <div class="field">
+        <input type="password" maxlength="128" placeholder="Password" id="password"/><span id="password-error" style="display:none; color: red;"></span>
+    </div>
+    <input type="button" value="Register" id="register" />
+	</div>
+	<div id="registrationSucessed"  style="display:none;">
+		Registration succeed.
+	</div>
+</body>
+</html>
