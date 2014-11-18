@@ -7,6 +7,8 @@
             $('#register').on('click',
                 function () {
                     $('#login-error').text('');
+					$('#password-error').text('');
+					$('#email-error').text('');
                     $('#login-error').hide();
                     if ($('#login').val() === null || $('#login').val() === undefined || $('#login').val() === '') {
                         $('#login-error').text($('#login-error').text() + 'Login shuld be passed!');
